@@ -105,5 +105,3 @@ If you have any feedback or questions, feel free to reach out or create an issue
 ```
 
 ---
-
-Let me know if you’d like to add badges, demo GIFs, or deploy it on Expo for live previews!
