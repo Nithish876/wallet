@@ -27,7 +27,7 @@
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-username/wallet.git
+git clone https://github.com/Nithish876/wallet.git
 cd wallet
 ```
 
