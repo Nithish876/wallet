@@ -1,13 +1,7 @@
-Here's a clean and professional `README.md` for your **Wallet** app repository:
 
----
-
-```markdown
 # 💰 Wallet
 
 **Wallet** is a simple, intuitive, and minimalistic mobile app for tracking your financial expenses. Built with modern technologies, it helps you manage your money with ease and clarity.
-
----
 
 ## 📱 Features
 
@@ -27,7 +21,6 @@ Here's a clean and professional `README.md` for your **Wallet** app repository:
 - **NativeWind** – Utility-first styling with Tailwind CSS for React Native  
 - **Zustand** – Minimal and fast global state management
 
----
 
 ## 🚀 Getting Started
 
