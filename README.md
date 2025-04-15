@@ -1,50 +1,116 @@
-# Welcome to your Expo app 👋
+Here's a clean and professional `README.md` for your **Wallet** app repository:
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+---
 
-## Get started
+```markdown
+# 💰 Wallet
 
-1. Install dependencies
+**Wallet** is a simple, intuitive, and minimalistic mobile app for tracking your financial expenses. Built with modern technologies, it helps you manage your money with ease and clarity.
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## 📱 Features
 
-   ```bash
-    npx expo start
-   ```
+- 📊 Track daily expenses in a clean and elegant UI
+- 📁 Organize transactions into categories
+- 🔥 Realtime syncing with Firebase
+- 🌙 Light & dark mode support
+- ⚡ Smooth performance with optimized state management
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🛠 Tech Stack
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **React Native (Expo)** – Cross-platform mobile app framework  
+- **TypeScript** – Type-safe and scalable development  
+- **Firebase** – Realtime database & authentication  
+- **NativeWind** – Utility-first styling with Tailwind CSS for React Native  
+- **Zustand** – Minimal and fast global state management
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## 🚀 Getting Started
+
+### 1. Clone the repo
 
 ```bash
-npm run reset-project
+git clone https://github.com/your-username/wallet.git
+cd wallet
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Install dependencies
 
-## Learn more
+```bash
+npm install
+# or
+yarn
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### 3. Start the development server
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npx expo start
+```
 
-## Join the community
+Make sure you have the Expo Go app installed on your device to preview the app.
 
-Join our community of developers creating universal apps.
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🔐 Firebase Setup
+
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+2. Create a new project
+3. Enable **Authentication** and **Firestore Database**
+4. Replace the placeholder Firebase config in `firebase/config.ts` with your actual Firebase credentials.
+
+---
+
+## 📁 Folder Structure
+
+```
+/components     # Reusable UI components
+/hooks          # Custom React hooks
+/store          # Zustand state management
+/constants      # App-wide constants
+/firebase       # Firebase config and logic
+/screens        # App screens (Home, Expense, etc.)
+```
+
+---
+
+## 📸 Screenshots
+
+Coming soon...
+
+---
+
+## ✨ Upcoming Features
+
+- Budget limits & alerts  
+- Monthly summary charts  
+- Export to CSV  
+- Cloud backup & restore
+
+---
+
+## 📄 License
+
+MIT
+
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you'd like to change.
+
+---
+
+## 📬 Contact
+
+If you have any feedback or questions, feel free to reach out or create an issue.
+
+```
+
+---
+
+Let me know if you’d like to add badges, demo GIFs, or deploy it on Expo for live previews!
