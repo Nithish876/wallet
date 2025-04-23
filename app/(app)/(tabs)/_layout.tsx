@@ -57,9 +57,9 @@
 //     </Tabs>
 //   );
 // }
-import React from 'react'
-import { Tabs } from 'expo-router';
-import CustomTabBar from '@/components/CustomTabBar';
+import React from "react";
+import { Tabs } from "expo-router";
+import CustomTabBar from "@/components/CustomTabBar";
 
 export default function TabLayout() {
   return (
@@ -67,12 +67,13 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName='index'
+      initialRouteName="index"
       tabBar={(props) => <CustomTabBar {...props} />}
     >
-      <Tabs.Screen name="index" options={{ title: 'Home' }} />
-      <Tabs.Screen name="stats" options={{ title: 'Stats' }} />
-      <Tabs.Screen name="settings" options={{ title: 'Settings' }} />
+      <Tabs.Screen name="index" options={{ title: "Home" }} />
+      <Tabs.Screen name="stats" options={{ title: "Stats" }} />
+      <Tabs.Screen name="wallets" options={{ title: "Wallets" }} />
+      <Tabs.Screen name="settings" options={{ title: "Settings" }} />
     </Tabs>
   );
 }

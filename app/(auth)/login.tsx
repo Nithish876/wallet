@@ -45,16 +45,16 @@ const LoginScreen = () => {
       <CustomInput
         label="Email"
         value={email}
-        onChangeText={setEmail}
+        onChangeText={(txt: any) => setEmail(txt)}
         iconName="email"
         errorMessage={error && !email ? "Email is required" : ""}
       />
       <CustomInput
         label="Password"
         value={password}
-        onChangeText={setPassword}
+        onChangeText={(txt: any) => setPassword(txt)}
         iconName="lock"
-        secureTextEntry
+        secureTextEntry={true}
         errorMessage={error && !password ? "Password is required" : ""}
       />
 
