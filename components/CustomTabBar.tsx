@@ -43,9 +43,10 @@ export default function CustomTabBar({ state, descriptors, navigation }: any) {
         const focused = state.index === index;
 
         const iconMap: any = {
-          home: "home",
+          index: "home",
           stats: "pie-chart-outline",
           settings: "settings-outline",
+          wallets: "wallet",
         };
 
         return (
