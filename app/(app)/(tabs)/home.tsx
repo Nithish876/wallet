@@ -7,16 +7,19 @@ import {
   StyleSheet,
   View,
   ImageSourcePropType,
+  StatusBar,
+  useColorScheme,
 } from "react-native";
-import { Feather, Ionicons } from "@expo/vector-icons"; 
+import { Feather, Ionicons } from "@expo/vector-icons";
 import ModalScreen from "@/components/ModalScreen";
-import TransactionForm from "@/components/TransactionForm"; 
+import TransactionForm from "@/components/TransactionForm";
 import { auth } from "@/firebase/config";
 import { IconSizes } from "@/constants/Sizes";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 //@ts-ignore
 import defaultAvatar from '@/assets/images/defaultAvatar.png'
+import { TouchableIcon } from "@/components/ScreenHeader";
 const { width } = Dimensions.get("window");
 
 const transactions = [
@@ -27,16 +30,20 @@ const transactions = [
 
 const HomeScreen = () => {
   const [TransactionModalVisible, setTransactionModalVisible] = useState(false);
-  const UserImg:any= auth.currentUser?.photoURL || "https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-e778-61f7-8a0b-396fc264c529/raw?se=2025-04-25T06%3A52%3A00Z&sp=r&sv=2024-08-04&sr=b&scid=4529ccd6-85d1-5457-aefe-6a0ba0e895dc&skoid=ae70be19-8043-4428-a990-27c58b478304&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-25T00%3A04%3A06Z&ske=2025-04-26T00%3A04%3A06Z&sks=b&skv=2024-08-04&sig=9pQ3fm4J64lIOZUZ0ZRoLHGXxs18cyBW1gcL2A4lTDs%3D";
+  const UserImg: any = auth.currentUser?.photoURL || "https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-e778-61f7-8a0b-396fc264c529/raw?se=2025-04-25T06%3A52%3A00Z&sp=r&sv=2024-08-04&sr=b&scid=4529ccd6-85d1-5457-aefe-6a0ba0e895dc&skoid=ae70be19-8043-4428-a990-27c58b478304&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-25T00%3A04%3A06Z&ske=2025-04-26T00%3A04%3A06Z&sks=b&skv=2024-08-04&sig=9pQ3fm4J64lIOZUZ0ZRoLHGXxs18cyBW1gcL2A4lTDs%3D";
 
   return (
     <ThemedView style={styles.container}>
+      <StatusBar barStyle={`${useColorScheme() == "dark" ? "light" : "dark"}-content`} backgroundColor={useColorScheme()=="dark"?"black":"white"} />
       {/* Header */}
       <ThemedView style={styles.header}>
         <Image source={{ uri: UserImg }} style={styles.avatar} />
         <View>
           <ThemedText type="title">Hi,{auth.currentUser?.displayName || "Nithish"}</ThemedText>
         </View>
+        <TouchableIcon iconStyles={"ml-auto"} icon="notifications-outline" handleBackRoute={function (): {} {
+          throw new Error("Function not implemented.");
+        } }   />
       </ThemedView>
 
       {/* Background glows */}
@@ -54,7 +61,7 @@ const HomeScreen = () => {
           <BalCardLabel amount={2000} isExpense Label="Expense" icon="arrow-up-right" />
         </ThemedView>
       </ThemedView>
- 
+
       <CtaBtn
         icon="add-circle"
         onPress={() => setTransactionModalVisible(true)}
@@ -105,8 +112,8 @@ const BalCardLabel = ({ amount, icon, Label, isExpense }: any) => {
           // { backgroundColor: isExpense ? "#ef4444" : "#84cc16" },
         ]}
       >
-        <Feather name={icon} size={IconSizes.md} color={ isExpense ? "#ef4444" : "#84cc16" } />
-        <ThemedText type="defaultSemiBold" style={[styles.amountText,{ color: isExpense ? "#ef4444" : "#84cc16" },]}>
+        <Feather name={icon} size={IconSizes.md} color={isExpense ? "#ef4444" : "#84cc16"} />
+        <ThemedText type="defaultSemiBold" style={[styles.amountText, { color: isExpense ? "#ef4444" : "#84cc16" },]}>
           ${amount}
         </ThemedText>
       </ThemedView>
@@ -128,15 +135,17 @@ const CtaBtn = ({ onPress, icon, title }: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fdfdfc",  
+    // backgroundColor: "#fdfdfc",  
     paddingHorizontal: 20,
-    paddingTop: 60,
+    paddingTop: 40,
     position: "relative",
   },
   header: {
     marginBottom: 20,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    gap: 10
   },
   avatar: {
     width: 40,
@@ -167,7 +176,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 20,
     marginBottom: 20,
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     shadowColor: "#84cc16",
     shadowOpacity: 0.08,
     shadowOffset: { width: 0, height: 8 },
@@ -193,11 +202,11 @@ const styles = StyleSheet.create({
   },
   amountBox: {
     flexDirection: "row",
-    alignItems: "center", 
+    alignItems: "center",
     borderRadius: 12,
     marginTop: 8,
   },
-  amountText: { 
+  amountText: {
     color: "#000",
   },
   ctaBtn: {
@@ -213,10 +222,10 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     marginBottom: 12,
-    color: "#111827",
+    // color: "#111827",
   },
   transactionCard: {
-    backgroundColor: "#f3f4f6",
+    // backgroundColor: "#f3f4f6",
     borderColor: "#d1d5db",
     borderWidth: 1,
     borderRadius: 14,
