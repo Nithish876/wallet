@@ -1,58 +1,3 @@
-// import React,{ createContext, ReactNode, useContext, useEffect, useState } from "react";
-// import {User,createUserWithEmailAndPassword,onAuthStateChanged, signInWithEmailAndPassword, signOut} from 'firebase/auth'
-// import { auth } from "@/firebase/config";
-
-// interface AuthContextProps {
-//     user:User|null;
-//     loading:boolean;
-//     login: (email: string, password: string) => Promise<void>;
-//     signup: (email: string, password: string) => Promise<void>;
-//     logout: () => Promise<void>;
-
-// }
-
-// const AuthContext = createContext<AuthContextProps>({
-//     user:null,
-//     loading:true,
-//     login:async()=>{},
-//     signup:async()=>{},
-//     logout:async()=>{}
-// });
-
-// interface AuthProviderProps{
-//     children:ReactNode;
-// }
-
-// export const AuthProvider = ({children}:AuthProviderProps)=>{
-//     const [user,setUser] = useState<User|null>(null);
-//     const [loading,setloading]= useState(true);
-
-//     useEffect(()=>{
-//         const unsub = onAuthStateChanged(auth,(user)=>{
-//             setUser(user ?? null);
-//             setloading(false);
-//         })
-//         return unsub;
-//     },[]);
-//    const login = async (email:string,password:string)=>{
-//     await signInWithEmailAndPassword(auth,email,password);
-//    }
-//     const signup = async (email:string,password:string)=>{
-//         await createUserWithEmailAndPassword(auth,email,password)
-//     }
-//     const logout = async()=>{
-//         await signOut(auth);
-//     }
-//     return(
-//         <AuthContext.Provider value={{user,loading,signup,login,logout}}>
-//         {children}
-//         </AuthContext.Provider>
-
-//     );
-// }
-
-// export const useAuth = ()=>useContext(AuthContext);
-// import React, { createContext, useState, useEffect, ReactNode, useContext } from 'react';
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -74,7 +19,7 @@ import React, {
 export const AuthContext = createContext<AuthContextType>({
   user: null,
   loading: true,
-  login: async () => {},
+  login: async ()=>{},
   register: async () => {},
   logout: async () => {},
 });
@@ -85,7 +30,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch user from AsyncStorage and set it in state
   useEffect(() => {
     const fetchUser = async () => {
       const storedUser = await AsyncStorage.getItem("user");
@@ -105,17 +49,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
             const userData = userDoc.data() as User;
             setUser(userData);
 
-            // Save user data to AsyncStorage
+ 
             await AsyncStorage.setItem("user", JSON.stringify(userData));
           } else {
-            console.log("No user document found"); // Debug log
+            console.log("No user document found");  
           }
         } catch (error) {
           console.error("Error fetching user doc:", error);
         }
       } else {
         setUser(null);
-        await AsyncStorage.removeItem("user"); // Remove user from AsyncStorage on logout
+        await AsyncStorage.removeItem("user");  
       }
       setLoading(false);
     });
@@ -130,7 +74,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         email,
         password,
       );
-      console.log("User registered:", userCredential.user); // Debug log
+      console.log("User registered:", userCredential.user);  
 
       const userData: User = {
         id: userCredential.user.uid,
@@ -141,10 +85,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       };
 
       await setDoc(doc(db, "users", userCredential.user.uid), userData);
-      console.log("User document created"); // Debug log
+      console.log("User document created"); 
       setUser(userData);
 
-      // Persist user data in AsyncStorage
+    
       await AsyncStorage.setItem("user", JSON.stringify(userData));
     } catch (error) {
       console.error("Registration error:", error);
@@ -172,7 +116,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const logout = async () => {
     await signOut(auth);
     setUser(null);
-    await AsyncStorage.removeItem("user"); // Clear user from AsyncStorage
+    await AsyncStorage.removeItem("user");  
   };
 
   return (
