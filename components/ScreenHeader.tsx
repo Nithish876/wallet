@@ -1,24 +1,22 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { IconSizes } from "@/constants/Sizes";
 import {
-  Text,
-  TouchableNativeFeedback,
   TouchableOpacity,
   View,
 } from "react-native";
-import { Route } from "expo-router/build/Route";
 import { router } from "expo-router";
-import { ThemedText } from "./ThemedText";
-import iconSet from "@expo/vector-icons/build/FontAwesome6";
-
+import { ThemedText } from "./ThemedText"
 export interface ScreenHeaderProps {
   backRoute?: string;
   rightIcon?: string;
   ScreenName?: string;
 }
-
-export const TouchableIcon = ({ handleBackRoute, icon, iconStyles }: any) => {
+export interface TouchableIconProps {
+  handleBackRoute: () => {};
+  icon: string;
+  iconStyles: string; 
+}
+export const TouchableIcon = ({ handleBackRoute, icon, iconStyles }: TouchableIconProps) => {
   return (
     <TouchableOpacity
       onPress={handleBackRoute}

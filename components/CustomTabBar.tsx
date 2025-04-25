@@ -1,9 +1,11 @@
 import React from "react";
-import { View, Pressable, Text } from "react-native";
+import { View, Pressable, Text, useColorScheme } from "react-native";
 import { BlurView } from "expo-blur";
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { ThemedView } from "./ThemedView";
+import { ThemedText } from "./ThemedText";
 
 const TabIcon = ({
   name,
@@ -19,21 +21,22 @@ const TabIcon = ({
       <Ionicons
         name={name as any}
         size={24}
-        color={focused ? "#84cc16" : "black"}  
+        color={focused ? "#84cc16" : useColorScheme()=="dark"?"white":"black"}  
       />
-      <Text
+      <ThemedText
         className={`text-xs ${focused ? "text-lime-500" : "black"}`}
       >
         {label}
-      </Text>
+      </ThemedText>
     </View>
   );
 };
 
 export default function CustomTabBar({ state, descriptors, navigation }: any) {
   return (
-    <View  
-      className="absolute bottom-4 left-4 right-4 mx-4 rounded-2xl px-4 py-3 flex-row justify-between items-center bg-white"
+    <ThemedView  
+    style={useColorScheme()=="dark"?{shadowColor:"#84cc16",shadowOffset:{width:10,height:10},shadowOpacity:.4,shadowRadius:8}:{}}
+      className="absolute bottom-4 left-4 right-4 mx-4 rounded-2xl px-4 py-3 flex-row justify-between items-center "
     >
       {state.routes.map((route: any, index: number) => {
         const { options } = descriptors[route.key];
@@ -61,6 +64,6 @@ export default function CustomTabBar({ state, descriptors, navigation }: any) {
           </Pressable>
         );
       })}
-    </View>
+    </ThemedView>
   );
 }
