@@ -34,16 +34,14 @@ const HomeScreen = () => {
 
   return (
     <ThemedView style={styles.container}>
-      <StatusBar barStyle={`${useColorScheme() == "dark" ? "light" : "dark"}-content`} backgroundColor={useColorScheme()=="dark"?"black":"white"} />
+      <StatusBar barStyle={`${useColorScheme() == "dark" ? "light" : "dark"}-content`} backgroundColor={useColorScheme() == "dark" ? "black" : "white"} />
       {/* Header */}
       <ThemedView style={styles.header}>
         <Image source={{ uri: UserImg }} style={styles.avatar} />
         <View>
           <ThemedText type="title">Hi,{auth.currentUser?.displayName || "Nithish"}</ThemedText>
         </View>
-        <TouchableIcon iconStyles={"ml-auto"} icon="notifications-outline" handleBackRoute={function (): {} {
-          throw new Error("Function not implemented.");
-        } }   />
+        <TouchableIcon iconStyles={"ml-auto"} icon="notifications-outline" handleBackRoute={() => { console.log('hello') }} />
       </ThemedView>
 
       {/* Background glows */}

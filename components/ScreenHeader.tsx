@@ -12,7 +12,7 @@ export interface ScreenHeaderProps {
   ScreenName?: string;
 }
 export interface TouchableIconProps {
-  handleBackRoute: () => {};
+  handleBackRoute: () => void;
   icon: string;
   iconStyles: string; 
 }

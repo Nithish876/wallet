@@ -38,6 +38,7 @@ const StatsScreen = () => {
     <ScrollView style={{ flex: 1, padding: 16 }}>
       <ThemedText
         type="title"
+        // className="mt-1"
         style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16 }}
       >
         Statistics

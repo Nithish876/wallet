@@ -24,6 +24,7 @@ const TabIcon = ({
         color={focused ? "#84cc16" : useColorScheme()=="dark"?"white":"black"}  
       />
       <ThemedText
+      style={[{fontSize:12},focused?{color:'#84cc16'}:{color:useColorScheme()=="dark"?"white":'black'}]}
         className={`text-xs ${focused ? "text-lime-500" : "black"}`}
       >
         {label}
