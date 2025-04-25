@@ -1,13 +1,21 @@
 import React, { PropsWithChildren } from "react";
-import { Modal, TouchableOpacity, View } from "react-native";
-import { ThemedView } from "./ThemedView";
+import {
+  Modal,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
+import { ThemedView } from "./ThemedView";
 
 export interface ModalScreenProps extends PropsWithChildren {
   isVisible: boolean;
   setisVisible: (state: boolean) => void;
   style?: any;
   containerClassNames?: string;
+  disableCloseButton?: boolean;
 }
 
 export default function ModalScreen({
@@ -15,32 +23,38 @@ export default function ModalScreen({
   isVisible,
   setisVisible,
   style,
-  containerClassNames,
+  containerClassNames = "",
+  disableCloseButton = false,
 }: ModalScreenProps) {
   return (
     <Modal
       visible={isVisible}
       animationType="slide"
-      transparent={true}
+      transparent
       onRequestClose={() => setisVisible(false)}
     >
-      <View className="flex-1 bg-black/80 justify-end">
-        <View
-          className={`rounded-t-3xl bg-black p-5 ${containerClassNames}`}
-          style={style}
-        >
+      <ThemedView className="flex-1 bg-black/80 justify-end">
+        <SafeAreaView className={`rounded-t-3xl p-5 ${containerClassNames}`} style={style}>
           {/* Close Button */}
-          <TouchableOpacity
-            onPress={() => setisVisible(false)}
-            className="absolute top-4 right-4 bg-lime-500 p-2 rounded-full z-10"
-          >
-            <Ionicons name="close" size={22} color="black" />
-          </TouchableOpacity>
+          {!disableCloseButton && (
+            <TouchableOpacity
+              onPress={() => setisVisible(false)}
+              className="absolute top-4 right-4 bg-lime-500 p-2 rounded-full z-10"
+            >
+              <Ionicons name="close" size={22} color="black" />
+            </TouchableOpacity>
+          )}
 
-          {/* Children Content */}
-          <View className="mt-8">{children}</View>
-        </View>
-      </View>
+          {/* Scrollable Content */}
+          <ScrollView
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+            className="mt-8"
+          >
+            {children}
+          </ScrollView>
+        </SafeAreaView>
+      </ThemedView>
     </Modal>
   );
 }

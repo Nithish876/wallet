@@ -16,7 +16,7 @@ const CustomBtn = (props: CustomBtnProps) => {
             cursor:"pointer"
          }}
         >
-            <View className={`bg-lime-400 p-4 rounded-xl shadow-sm shadow-zinc-900 ${props.className}`} >
+            <View className={`bg-lime-500 p-4 rounded-xl shadow-sm shadow-zinc-900 ${props.className}`} >
             <Text className=''>{props.title}</Text>
             </View>
         </TouchableOpacity>

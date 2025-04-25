@@ -19,10 +19,10 @@ const TabIcon = ({
       <Ionicons
         name={name as any}
         size={24}
-        color={focused ? "#6366F1" : "#9CA3AF"} // indigo-500 : gray-400
+        color={focused ? "#84cc16" : "black"}  
       />
       <Text
-        className={`text-xs ${focused ? "text-indigo-500 font-medium" : "text-gray-400"}`}
+        className={`text-xs ${focused ? "text-lime-500" : "black"}`}
       >
         {label}
       </Text>
@@ -32,9 +32,7 @@ const TabIcon = ({
 
 export default function CustomTabBar({ state, descriptors, navigation }: any) {
   return (
-    <BlurView
-      intensity={60}
-      tint="light"
+    <View  
       className="absolute bottom-4 left-4 right-4 mx-4 rounded-2xl px-4 py-3 flex-row justify-between items-center bg-white"
     >
       {state.routes.map((route: any, index: number) => {
@@ -43,10 +41,10 @@ export default function CustomTabBar({ state, descriptors, navigation }: any) {
         const focused = state.index === index;
 
         const iconMap: any = {
-          index: "home",
+          home: "home-outline",
           stats: "pie-chart-outline",
           settings: "settings-outline",
-          wallets: "wallet",
+          wallets: "wallet-outline",
         };
 
         return (
@@ -63,6 +61,6 @@ export default function CustomTabBar({ state, descriptors, navigation }: any) {
           </Pressable>
         );
       })}
-    </BlurView>
+    </View>
   );
 }

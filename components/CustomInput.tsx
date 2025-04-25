@@ -22,9 +22,10 @@ interface CustomInputProps {
   value: string | boolean;
   onChangeText: (text: string | boolean) => void;
   iconName: string;
+  secureTextEntry?:boolean;
   type?: InputType;
   errorMessage?: string;
-  options?: Option[]; // for select type
+  options?: Option[];  
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -33,13 +34,14 @@ const CustomInput: React.FC<CustomInputProps> = ({
   onChangeText,
   iconName,
   type = "text",
+  secureTextEntry,
   errorMessage,
   options = [],
 }) => {
   const theme = useColorScheme();
   const isDark = theme === "dark";
 
-  const isSecure = type === "password";
+  const isSecure = type === "password" ||secureTextEntry;
   const isSwitch = type === "switch";
   const isSelect = type === "select";
 
