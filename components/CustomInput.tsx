@@ -47,7 +47,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
 
   return (
     <View className="mb-4">
-      <ThemedText className="text-gray-600 text-sm mb-1" type="defaultSemiBold">
+      <ThemedText className="text-gray-600  text-sm mb-1" type="defaultSemiBold">
         {label}
       </ThemedText>
       <View
@@ -93,6 +93,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
             onChangeText={(text) => onChangeText(text)}
             secureTextEntry={isSecure}
             placeholder={`Enter ${label}`}
+            placeholderTextColor={"gray"}
             keyboardType={type === "email" ? "email-address" : "default"}
           />
         )}

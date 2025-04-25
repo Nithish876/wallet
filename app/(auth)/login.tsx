@@ -3,6 +3,8 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  StatusBar,
+  useColorScheme,
 } from "react-native";
 import React, { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
@@ -32,12 +34,17 @@ const LoginScreen = () => {
 
     setError("");
   };
-
+const theme = useColorScheme();
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       style={{ flex: 1, justifyContent: "center", padding: 16 }}
     >
+           <StatusBar
+              barStyle={theme === 'dark' ? 'light-content' : 'dark-content'}
+              backgroundColor={theme === 'dark' ? '#0f172a' : '#f1f5f9'}
+            />
+    
       <ThemedView
         style={{
           padding: 20,
@@ -108,7 +115,7 @@ const LoginScreen = () => {
           <ThemedText style={{ textAlign: "center", fontSize: 14 }}>
             Don't have an account?{" "}
             <ThemedText style={{ color: "#84cc16", fontWeight: "bold" }}>
-              Sign up
+              Register
             </ThemedText>
           </ThemedText>
         </TouchableOpacity>

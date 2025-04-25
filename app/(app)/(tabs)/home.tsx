@@ -6,7 +6,6 @@ import {
   Image,
   StyleSheet,
   View,
-  ImageSourcePropType,
   StatusBar,
   useColorScheme,
 } from "react-native";
@@ -17,15 +16,18 @@ import { auth } from "@/firebase/config";
 import { IconSizes } from "@/constants/Sizes";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-//@ts-ignore
-import defaultAvatar from '@/assets/images/defaultAvatar.png'
 import { TouchableIcon } from "@/components/ScreenHeader";
+import { Colors } from "@/constants/Colors";
+import { LinearGradient } from "expo-linear-gradient";
 const { width } = Dimensions.get("window");
 
 const transactions = [
-  { id: "1", title: "Groceries", amount: -120, date: "Apr 15" },
-  { id: "2", title: "Salary", amount: 1500, date: "Apr 14" },
-  { id: "3", title: "Electricity Bill", amount: -60, date: "Apr 13" },
+  { id: "1", title: "Groceries", amount: -120, date: "Apr 15",icon:'cart' },
+  { id: "2", title: "Salary", amount: 1500, date: "Apr 14" ,icon:'cash'},
+  { id: "3", title: "Electricity Bill", amount: -60, date: "Apr 13" ,icon:"flash"},
+  { id: "4", title: "Groceries", amount: -120, date: "Apr 15" ,icon:"cart"},
+  { id: "5", title: "Salary", amount: 1500, date: "Apr 14" ,icon:"cash"},
+  { id: "6", title: "Electricity Bill", amount: -60, date: "Apr 13" ,icon:'flash'},
 ];
 
 const HomeScreen = () => {
@@ -39,7 +41,7 @@ const HomeScreen = () => {
       <ThemedView style={styles.header}>
         <Image source={{ uri: UserImg }} style={styles.avatar} />
         <View>
-          <ThemedText type="title">Hi,{auth.currentUser?.displayName || "Nithish"}</ThemedText>
+          <ThemedText type="defaultSemiBold" style={styles.greetTitle} >Hi,{auth.currentUser?.displayName || "Nithish"}</ThemedText>
         </View>
         <TouchableIcon iconStyles={"ml-auto"} icon="notifications-outline" handleBackRoute={() => { console.log('hello') }} />
       </ThemedView>
@@ -75,17 +77,26 @@ const HomeScreen = () => {
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ paddingBottom: 120 }}
         renderItem={({ item }) => (
-          <ThemedView style={styles.transactionCard}>
-            <ThemedText type="default">{item.title}</ThemedText>
-            <ThemedText
-              type="defaultSemiBold"
-              style={{
-                color: item.amount >= 0 ? "#84cc16" : "#f87171",
-              }}
-            >
-              {item.amount >= 0 ? "+" : "-"}${Math.abs(item.amount)}
-            </ThemedText>
-          </ThemedView>
+          <TouchableOpacity >
+            <LinearGradient
+                    colors={["#a3e635", "#65a30d"]}
+                    start={[0, 0]}
+                    end={[1, 1]}
+                    style={styles.transactionCard}>
+              <View className="flex flex-row gap-2">
+                <Ionicons name={item.icon} color={"black"} size={20} />
+                <ThemedText type="default" style={{color:'black'}} className="text-black">{item.title}</ThemedText>
+              </View>
+              <ThemedText
+                type="defaultSemiBold"
+                style={{
+                  color: item.amount >= 0 ? "black" : "black",
+                }}
+              >
+                {item.amount >= 0 ? "+" : "-"}${Math.abs(item.amount)}
+              </ThemedText>
+            </LinearGradient>
+          </TouchableOpacity>
         )}
       />
 
@@ -121,11 +132,18 @@ const BalCardLabel = ({ amount, icon, Label, isExpense }: any) => {
 
 const CtaBtn = ({ onPress, icon, title }: any) => {
   return (
-    <TouchableOpacity style={styles.ctaBtn} onPress={onPress}>
+    <TouchableOpacity  onPress={onPress}>
+      <LinearGradient
+      style={styles.ctaBtn}
+      className="flex flex-row"
+                    colors={["#a3e635", "#65a30d"]}
+                    start={[0, 0]}
+                    end={[1, 1]}>
       <Ionicons name={icon} size={20} color="black" />
       <ThemedText type="defaultSemiBold" style={{ color: "black" }}>
         {title}
       </ThemedText>
+      </LinearGradient>
     </TouchableOpacity>
   );
 };
@@ -135,7 +153,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: "#fdfdfc",  
     paddingHorizontal: 20,
-    paddingTop: 40,
+    paddingTop: 20,
     position: "relative",
   },
   header: {
@@ -144,6 +162,9 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     gap: 10
+  },
+  greetTitle: {
+    fontSize: 18,
   },
   avatar: {
     width: 40,
@@ -223,7 +244,7 @@ const styles = StyleSheet.create({
     // color: "#111827",
   },
   transactionCard: {
-    // backgroundColor: "#f3f4f6",
+    // backgroundColor: Colors.light.primary,
     borderColor: "#d1d5db",
     borderWidth: 1,
     borderRadius: 14,
