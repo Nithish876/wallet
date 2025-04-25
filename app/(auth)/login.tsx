@@ -1,87 +1,119 @@
 import {
   Alert,
-  SafeAreaView,
-  StyleSheet,
-  Text,
   TouchableOpacity,
-  View,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import React, { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import CustomInput from "@/components/CustomInput";
-import { ThemedText } from "@/components/ThemedText";
 import { router } from "expo-router";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
 
 const LoginScreen = () => {
-  const { user, loading, login } = useAuth();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleLogin = async () => {
-    if (email == "" || password == "") {
+    if (email === "" || password === "") {
       setError("Please fill in all fields");
       return;
     }
+
     try {
       await login(email, password);
-      router.replace("/(app)/(tabs)");
+      router.replace("/(app)/(tabs)/home");
     } catch (error: any) {
-      Alert.alert("Login Failed ", error.message);
+      Alert.alert("Login Failed", error.message);
     }
-    //TODO:handle firebase logic
 
     setError("");
   };
 
   return (
-    <View style={{ padding: 16, flex: 1, justifyContent: "center" }}>
-      <ThemedText
-        style={{ fontSize: 28, fontWeight: "bold", marginBottom: 32 }}
-      >
-        Login
-      </ThemedText>
-
-      <CustomInput
-        label="Email"
-        value={email}
-        onChangeText={(txt: any) => setEmail(txt)}
-        iconName="email"
-        errorMessage={error && !email ? "Email is required" : ""}
-      />
-      <CustomInput
-        label="Password"
-        value={password}
-        onChangeText={(txt: any) => setPassword(txt)}
-        iconName="lock"
-        secureTextEntry={true}
-        errorMessage={error && !password ? "Password is required" : ""}
-      />
-
-      <TouchableOpacity
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
+      style={{ flex: 1, justifyContent: "center", padding: 16 }}
+    >
+      <ThemedView
         style={{
-          backgroundColor: "#4CAF50",
-          paddingVertical: 12,
-          borderRadius: 8,
+          padding: 20,
+          borderRadius: 16,
+          // backgroundColor: "#1e1e1e",
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.1,
+          shadowRadius: 10,
+          elevation: 5,
         }}
-        onPress={handleLogin}
       >
         <ThemedText
-          style={{ textAlign: "center", color: "#fff", fontSize: 16 }}
+          type="title"
+          style={{
+            fontSize: 28,
+            fontWeight: "bold",
+            marginBottom: 24,
+            textAlign: "center",
+            color: "#84cc16",
+          }}
         >
           Login
         </ThemedText>
-      </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => console.log("Go to SignUp")}>
-        <ThemedText style={{ textAlign: "center", marginTop: 12 }}>
-          Don't have an account?{" "}
-          <TouchableOpacity onPress={() => router.replace("/(auth)/signup")}>
-            <ThemedText style={{ color: "#4CAF50" }}>Sign up</ThemedText>
-          </TouchableOpacity>
-        </ThemedText>
-      </TouchableOpacity>
-    </View>
+        <CustomInput
+          label="Email"
+          value={email}
+          onChangeText={(txt: any) => setEmail(txt)}
+          iconName="email"
+          errorMessage={error && !email ? "Email is required" : ""}
+        />
+
+        <CustomInput
+          label="Password"
+          value={password}
+          onChangeText={(txt: any) => setPassword(txt)}
+          iconName="lock"
+          secureTextEntry
+          errorMessage={error && !password ? "Password is required" : ""}
+        />
+
+        <TouchableOpacity
+          onPress={handleLogin}
+          style={{
+            backgroundColor: "#84cc16",
+            paddingVertical: 12,
+            borderRadius: 12,
+            marginTop: 20,
+          }}
+        >
+          <ThemedText
+            style={{
+              textAlign: "center",
+              fontSize: 16,
+              fontWeight: "bold",
+              color: "#000",
+            }}
+          >
+            Login
+          </ThemedText>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => router.replace("/(auth)/signup")}
+          style={{ marginTop: 16 }}
+        >
+          <ThemedText style={{ textAlign: "center", fontSize: 14 }}>
+            Don't have an account?{" "}
+            <ThemedText style={{ color: "#84cc16", fontWeight: "bold" }}>
+              Sign up
+            </ThemedText>
+          </ThemedText>
+        </TouchableOpacity>
+      </ThemedView>
+    </KeyboardAvoidingView>
   );
 };
 

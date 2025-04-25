@@ -18,7 +18,7 @@ export default function Index() {
         setValue(true);
         router.replace('/onboarding');
       } else if (user) {
-        router.replace('/(app)/(tabs)');
+        router.replace("/(app)/(tabs)/home");
       } else {
         router.replace('/(auth)/login');
       }

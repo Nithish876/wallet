@@ -5,8 +5,7 @@ import ScreenHeader from "@/components/ScreenHeader";
 
 export default function WalletsScreen() {
   return (
-    <ThemedView className="flex-1 ">
-      <ScreenHeader ScreenName="Wallets" />
+    <ThemedView className="flex-1 "> 
     </ThemedView>
   );
 }
