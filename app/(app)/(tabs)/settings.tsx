@@ -3,12 +3,16 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { useAuth } from '@/context/AuthContext';
 
 const SettingsScreen = () => {
+  const {logout}= useAuth();
   const handleLogout = () => {
     Alert.alert('Logout', 'Are you sure you want to logout?', [
       { text: 'Cancel', style: 'cancel' },
-      { text: 'Logout', onPress: () => console.log('Logged out'), style: 'destructive' },
+      { text: 'Logout', onPress: () => {
+        logout();
+      }, style: 'destructive' },
     ]);
   };
 

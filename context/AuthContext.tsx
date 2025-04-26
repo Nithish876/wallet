@@ -84,8 +84,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         friends: [],
       };
 
-      await setDoc(doc(db, "users", userCredential.user.uid), userData);
-      console.log("User document created"); 
+      try {
+        await setDoc(doc(db, "users", userCredential.user.uid), userData);
+        console.log("User document created in Firestore");
+      } catch (error) {
+        console.error("Error creating user document in Firestore:", error);
+      }
+      
       setUser(userData);
 
     
@@ -114,8 +119,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const logout = async () => {
+    setLoading(true);
     await signOut(auth);
     setUser(null);
+    setLoading(false);
     await AsyncStorage.removeItem("user");  
   };
 
